@@ -91,8 +91,22 @@ public Byte getDiscountAdvanceSale() {
 
 @Override
 public int getNumberOfSoldSeats() {
-	// TODO Auto-generated method stub
-	return 0;
+	//Calcula el numero de asientos totales vendidos del evento
+	
+	int numSoldSeats = 0;
+	
+	for(int i = 0; i < this.nSeats; i++) {
+		
+		if(this.seats[i] != null) {
+			
+			numSoldSeats++;
+			
+		}
+		
+	}
+	
+	return numSoldSeats;
+	
 }
 
 
