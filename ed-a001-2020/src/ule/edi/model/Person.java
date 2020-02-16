@@ -46,11 +46,20 @@ public class Person {
 	
     @Override
 	public boolean equals(Object obj) {
-		// TODO Auto-generated method stub
 		// Dos personas son iguales si son iguales sus nifs
-		
     	
-		return false;
+		boolean testigo = true; //por defecto, los supongo iguales
+		
+		Person paramPersona = (Person)obj;
+		
+		if(paramPersona.getNif().compareTo(this.nif) != 0) {
+			//si no son iguales lexicográficamente los dos nifs cambio el testigo
+			
+			testigo = false;
+			
+		}
+    	
+    	return testigo;
 	}
 	
 }

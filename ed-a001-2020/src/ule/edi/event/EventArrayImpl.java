@@ -9,7 +9,7 @@ import ule.edi.model.*;
 import ule.edi.model.Configuration.Type;
 
 
-public class EventArrayImpl implements Event {
+public class EventArrayImpl implements Event { //Esta es como si dijeramos la clase evento, porque evento per se es una interfaz con métodos sin implementar. Han de implementarse aqui porque "implements la interface"
 	
 	private String name;
 	private Date eventDate;
