@@ -112,8 +112,27 @@ public int getNumberOfSoldSeats() {
 
 @Override
 public int getNumberOfNormalSaleSeats() {
-	// TODO Auto-generated method stub
-	return 0;
+
+	int numNormalSaleSeats = 0;
+	
+	for(int i = 0; i < this.nSeats; i++) {
+		
+		if(this.seats[i] != null) { //si esta ocupado voy a cotillear que tipo de venta tuvo
+			
+			Type normalSaleType = Configuration.Type.NORMAL;
+			
+			if(seats[i].getType().equals(normalSaleType)) {
+				
+				numNormalSaleSeats++;
+			}
+			
+		}
+		
+	}
+	
+	return numNormalSaleSeats;
+	
+	
 }
 
 
