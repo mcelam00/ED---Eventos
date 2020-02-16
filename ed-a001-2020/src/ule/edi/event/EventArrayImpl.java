@@ -63,29 +63,29 @@ public class EventArrayImpl implements Event { //Esta es como si dijeramos la cl
 
 @Override
 public String getName() {
-	// TODO Auto-generated method stub
-	return null;
+	
+	return this.name;
 }
 
 
 @Override
 public Date getDateEvent() {
-	// TODO Auto-generated method stub
-	return null;
+	
+	return this.eventDate;	
 }
 
 
 @Override
 public Double getPrice() {
-	// TODO Auto-generated method stub
-	return null;
+
+	return this.price;
 }
 
 
 @Override
 public Byte getDiscountAdvanceSale() {
-	// TODO Auto-generated method stub
-	return null;
+	
+	return this.discountAdvanceSale;
 }
 
 
