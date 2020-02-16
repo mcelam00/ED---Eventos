@@ -23,12 +23,21 @@ public class EventArrayImpl implements Event { //Esta es como si dijeramos la cl
 	
 	
    public EventArrayImpl(String name, Date date, int nSeats){
-	 //TODO 
 	 // utiliza los precios por defecto: DEFAULT_PRICE y DEFAULT_DISCOUNT definidos en Configuration.java   
 	 // Debe crear el array de butacas
-
-	
 	   
+	   //Se asignan los parámetros a los atributos
+	   this.name = name;
+	   this.eventDate = date;
+	   this.nSeats = nSeats;
+	   
+	   //Se utilizan los valores por defecto como se indica 
+	   this.price = Configuration.DEFAULT_PRICE;
+	   this.discountAdvanceSale = Configuration.DEFAULT_DISCOUNT;
+
+	   //Crea el array de Butacas
+	   seats = new Seat[nSeats];
+		   
    }
    
    
