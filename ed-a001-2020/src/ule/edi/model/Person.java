@@ -48,18 +48,18 @@ public class Person {
 	public boolean equals(Object obj) {
 		// Dos personas son iguales si son iguales sus nifs
     	
-		boolean testigo = true; //por defecto, los supongo iguales
+		boolean flag = true; //por defecto, los supongo iguales
 		
-		Person paramPersona = (Person)obj;
+		Person personParam = (Person)obj;
 		
-		if(paramPersona.getNif().compareTo(this.nif) != 0) {
+		if(personParam.getNif().compareTo(this.nif) != 0) {
 			//si no son iguales lexicográficamente los dos nifs cambio el testigo
 			
-			testigo = false;
+			flag = false;
 			
 		}
     	
-    	return testigo;
+    	return flag;
 	}
 	
 }
