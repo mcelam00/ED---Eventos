@@ -162,15 +162,30 @@ public int getNumberOfAdvanceSaleSeats() {
 
 @Override
 public int getNumberOfSeats() {
-	// TODO Auto-generated method stub
-	return 0;
+	
+	return this.nSeats;
+	
 }
 
 
 @Override
 public int getNumberOfAvailableSeats() {
-	// TODO Auto-generated method stub
-	return 0;
+	
+int numAvailableSeats = 0;
+	
+	for(int i = 0; i < this.nSeats; i++) {
+		
+		if(this.seats[i] == null) {
+			
+			numAvailableSeats++;
+			
+		}
+		
+	}
+	
+	return numAvailableSeats;
+	
+	
 }
 
 
