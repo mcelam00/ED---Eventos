@@ -138,8 +138,25 @@ public int getNumberOfNormalSaleSeats() {
 
 @Override
 public int getNumberOfAdvanceSaleSeats() {
-	// TODO Auto-generated method stub
-	return 0;
+
+	int numAdvanceSaleSeats = 0;
+	
+	for(int i = 0; i < this.nSeats; i++) {
+		
+		if(this.seats[i] != null) { //si esta ocupado voy a cotillear que tipo de venta tuvo
+			
+			Type AdvanceSaleType = Configuration.Type.ADVANCE_SALE;
+			
+			if(seats[i].getType().equals(AdvanceSaleType)) {
+				
+				numAdvanceSaleSeats++;
+			}
+			
+		}
+		
+	}
+	
+	return numAdvanceSaleSeats;
 }
 
 
