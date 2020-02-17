@@ -345,15 +345,33 @@ public int getNumberOfAttendingElderlyPeople() {
 
 @Override
 public List<Integer> getAvailableSeatsList() {
-	// TODO Auto-generated method stub
-	return null;
+	
+	ArrayList<Integer> availableSeats = new ArrayList<Integer>();
+	
+	for(int i = 0; i < nSeats; i++) {
+		
+		if(seats[i] == null) {
+			
+			availableSeats.add(i+1);
+			
+		}
+		
+		
+	}
+	
+	return availableSeats;
+	
 }
 
 
 @Override
 public List<Integer> getAdvanceSaleSeatsList() {
-	// TODO Auto-generated method stub
-	return null;
+
+
+	
+	
+	
+	
 }
 
 
