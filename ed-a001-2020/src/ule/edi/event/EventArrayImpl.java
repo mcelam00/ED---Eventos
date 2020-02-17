@@ -456,8 +456,37 @@ public Double getPrice(Seat seat) {
 
 @Override
 public Double getCollectionEvent() {
-	// TODO Auto-generated method stub
-	return null;
+	
+	Double totalCollected = 0.0;
+	
+	Type advanceSale = Configuration.Type.ADVANCE_SALE; 
+	Type normalSale = Configuration.Type.NORMAL; 
+		
+	
+	for(int i = 0; i < nSeats; i++) {
+		
+		
+		if(seats[i].getType().equals(advanceSale)) {
+			
+			Byte discount = this.discountAdvanceSale; //por defecto o si se le ha pasado uno al constructor, ese
+			
+			float partsPerUnit = 1 - (discount/100); //en tanto por uno (25% descuento equivale a 0.75)
+			
+			totalCollected = totalCollected + (this.price*partsPerUnit);
+			
+			
+		}else if(seats[i].getType().equals(normalSale)) {
+			
+			totalCollected = totalCollected + this.price;
+			
+		}
+		
+		
+	}
+	
+	return totalCollected;
+	
+	
 }
 
 
