@@ -191,8 +191,21 @@ int numAvailableSeats = 0;
 
 @Override
 public Seat getSeat(int pos) {
-	// TODO Auto-generated method stub
-	return null;
+
+	Seat seatRequested;
+	
+	if(seats[pos-1] != null) {
+	
+		seatRequested = seats[pos-1];
+	
+	}else {
+	
+		seatRequested = null;
+		
+	}
+	
+	return seatRequested;
+	
 }
 
 
