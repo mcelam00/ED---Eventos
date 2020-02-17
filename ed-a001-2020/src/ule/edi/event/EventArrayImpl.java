@@ -298,8 +298,25 @@ public int getNumberOfAttendingChildren() {
 
 @Override
 public int getNumberOfAttendingAdults() {
-	// TODO Auto-generated method stub
-	return 0;
+
+	int numOfAdults = 0;
+	
+	for(int i = 0; i < nSeats; i++) {
+		
+		if((seats[i] != null)) {  //esta ocupada 
+			
+			if((seats[i].getHolder().getAge() >= Configuration.CHILDREN_EXMAX_AGE) & (seats[i].getHolder().getAge() < Configuration.ELDERLY_PERSON_INMIN_AGE)) {
+			
+				numOfAdults++;
+				
+			}
+									
+		}
+				
+	}
+	
+	return numOfAdults;	
+	
 }
 
 
