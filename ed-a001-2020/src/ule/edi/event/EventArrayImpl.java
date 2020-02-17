@@ -386,8 +386,42 @@ public List<Integer> getAdvanceSaleSeatsList() {
 
 @Override
 public int getMaxNumberConsecutiveSeats() {
-	// TODO Auto-generated method stub
-	return 0;
+	
+	int maximunStored = 0;
+	int currentMaximun = 0;
+	
+	for(int i = 0; i < nSeats; i++) {
+	
+		if(seats[i] != null || i == nSeats-1) { //si esta ocupada, se resetea el parcial. Si es al ultima iteracion quiero que compruebe tambien porque si llevo 6 al final y tengo 4 se pierde porque la ultima posicion del array es vacante y no compararia el 6 con el 4 almacenado
+			
+			//antes de resetear el parcial se compara con el almacenado a ver si hemos conseguido una cifra mayor de vacantes consecutivos
+			if(currentMaximun > maximunStored) {
+				
+				maximunStored = currentMaximun;
+			
+			}
+					
+			currentMaximun = 0;
+			
+		}else {
+		
+			currentMaximun++;
+		}
+		
+		
+	}
+	
+	
+	if(currentMaximun == nSeats) { //si todo el array esta vacante se retorna el tamaño
+	
+		maximunStored = nSeats;
+		
+	}
+	
+	
+	return maximunStored;
+	
+	
 }
 
 
