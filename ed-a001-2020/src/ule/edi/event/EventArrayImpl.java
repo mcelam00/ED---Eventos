@@ -322,8 +322,24 @@ public int getNumberOfAttendingAdults() {
 
 @Override
 public int getNumberOfAttendingElderlyPeople() {
-	// TODO Auto-generated method stub
-	return 0;
+	
+	int numOfElderlys = 0;
+	
+	for(int i = 0; i < nSeats; i++) {
+		
+		if((seats[i] != null)) {  //esta ocupada 
+			
+			if((seats[i].getHolder().getAge() >= Configuration.ELDERLY_PERSON_INMIN_AGE) & (seats[i].getHolder().getAge() < Integer.MAX_VALUE)) {
+			
+				numOfElderlys++;
+				
+			}
+									
+		}
+				
+	}
+	
+	return numOfElderlys;	
 }
 
 
