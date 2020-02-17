@@ -233,8 +233,46 @@ public Person refundSeat(int pos) {
 
 @Override
 public boolean sellSeat(int pos, Person p, boolean advanceSale) {
-	// TODO Auto-generated method stub
-	return false;
+
+	boolean transactionComplete = false;
+	
+	//check de los parametros de entrada
+	
+	if(pos-1 < 0 & pos-1 >= nSeats) { //out of bounds
+		
+		System.out.println("No es posible acceder a esa butaca, excede el aforo del evento");
+	
+	}else if(seats[pos-1] == null) { //butaca libre
+		
+		
+		transactionComplete = true;
+		
+		//se vende
+		
+		if(advanceSale == false) {
+			
+			Type type = Configuration.Type.NORMAL; //es como si fuera una clase el enum
+			
+			Seat seatToSell = new Seat(this, pos, type, p);
+			
+			seats[pos-1] = seatToSell;
+			
+			
+		}else if(advanceSale == true){
+			
+			Type type = Configuration.Type.ADVANCE_SALE;
+			
+			Seat seatToSell = new Seat(this, pos, type, p);
+			
+			seats[pos-1] = seatToSell;
+			
+		}
+			
+		
+	}
+	
+	return transactionComplete;
+	
 }
 
 
