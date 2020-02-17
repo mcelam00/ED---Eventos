@@ -278,8 +278,21 @@ public boolean sellSeat(int pos, Person p, boolean advanceSale) {
 
 @Override
 public int getNumberOfAttendingChildren() {
-	// TODO Auto-generated method stub
-	return 0;
+
+	int numOfChilds = 0;
+	
+	for(int i = 0; i < nSeats; i++) {
+		
+		if((seats[i] != null) & (seats[i].getHolder().getAge() < Configuration.CHILDREN_EXMAX_AGE)) {  //esta ocupada y por un niño
+			
+			numOfChilds++;
+			
+		}
+				
+	}
+	
+	return numOfChilds;
+	
 }
 
 
