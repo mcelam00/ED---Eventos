@@ -516,8 +516,22 @@ public int getPosPerson(Person p) {
 
 @Override
 public boolean isAdvanceSale(Person p) {
-	// TODO Auto-generated method stub
-	return false;
+	
+	boolean isAdvanceSale = false;
+	
+	int position = this.getPosPerson(p);
+	
+	Type typeOfSale = Configuration.Type.ADVANCE_SALE;
+	
+	
+	if(seats[position-1].getType().equals(typeOfSale)) {
+		
+		isAdvanceSale = true;
+		
+	}
+	
+	return isAdvanceSale;
+	
 }
    
 
