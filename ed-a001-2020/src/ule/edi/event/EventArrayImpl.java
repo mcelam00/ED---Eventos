@@ -356,7 +356,6 @@ public List<Integer> getAvailableSeatsList() {
 			
 		}
 		
-		
 	}
 	
 	return availableSeats;
@@ -367,11 +366,21 @@ public List<Integer> getAvailableSeatsList() {
 @Override
 public List<Integer> getAdvanceSaleSeatsList() {
 
+	ArrayList<Integer> advanceSaleSeats = new ArrayList<Integer>();
+	Type type = Configuration.Type.ADVANCE_SALE;
+	
+	for(int i = 0; i < nSeats; i++) {
+		
+		if((seats[i] != null) & (seats[i].getType().equals(type))) {
+			
+			advanceSaleSeats.add(i+1);
+			
+		}
+		
+	}
+	
+	return advanceSaleSeats;	
 
-	
-	
-	
-	
 }
 
 
