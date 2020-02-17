@@ -427,8 +427,30 @@ public int getMaxNumberConsecutiveSeats() {
 
 @Override
 public Double getPrice(Seat seat) {
-	// TODO Auto-generated method stub
-	return null;
+	
+	Double seatPrice = 0.0;
+	
+	Type advanceSale = Configuration.Type.ADVANCE_SALE; 
+	Type normalSale = Configuration.Type.NORMAL; 
+	
+	
+	if(seat.getType().equals(advanceSale)) {
+		
+		Byte discount = this.discountAdvanceSale; //por defecto o si se le ha pasado uno al constructor, ese
+		
+		float partsPerUnit = 1 - (discount/100); //en tanto por uno (25% descuento equivale a 0.75)
+		
+		seatPrice = this.price*partsPerUnit;
+		
+		
+	}else if(seat.getType().equals(normalSale)) {
+		
+		seatPrice = this.price;
+		
+	}
+	
+	return seatPrice;
+	
 }
 
 
