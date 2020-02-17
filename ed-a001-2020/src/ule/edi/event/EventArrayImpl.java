@@ -194,11 +194,11 @@ public Seat getSeat(int pos) {
 
 	Seat seatRequested;
 	
-	if(seats[pos-1] != null) {
+	if(seats[pos-1] != null) { //esta ocupada
 	
 		seatRequested = seats[pos-1];
 	
-	}else {
+	}else { //esta libre
 	
 		seatRequested = null;
 		
@@ -211,8 +211,23 @@ public Seat getSeat(int pos) {
 
 @Override
 public Person refundSeat(int pos) {
-	// TODO Auto-generated method stub
-	return null;
+	
+	Person holder;
+	
+	if(seats[pos-1] != null) { //esta ocupada
+		
+		holder = seats[pos-1].getHolder();  //retorno al ocupante
+		
+		seats[pos-1] = null; //se libera
+		
+	}else { //esta libre
+		
+		holder = null;
+		
+	}
+	
+	return holder;
+	
 }
 
 
