@@ -492,8 +492,25 @@ public Double getCollectionEvent() {
 
 @Override
 public int getPosPerson(Person p) {
-	// TODO Auto-generated method stub
-	return 0;
+	
+	int posicion = -1;
+	int i = 0;
+	
+	while(posicion == -1) { //mientras no se encuentre sigue buscando y si no está queda el valor por defecto que es -1
+		
+		if(seats[i].getHolder().equals(p)) {
+			
+			posicion = i+1; 
+			
+		}
+		
+		i++;
+	}
+	
+	
+	return posicion;
+	
+	
 }
 
 
