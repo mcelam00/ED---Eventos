@@ -50,15 +50,32 @@ public class Person {
     	
 		boolean flag = true; //por defecto, los supongo iguales
 		
-		Person personParam = (Person)obj;
+		if(obj == this) { //comparar direccines con == siempre
+			
+			flag = true; //si el objeto que se nos pasa no es de tipo person y no se 
 		
-		if(personParam.getNif().compareTo(this.nif) != 0) {
-			//si no son iguales lexicográficamente los dos nifs cambio el testigo
+		}else {
 			
-			flag = false;
 			
+			if(obj instanceof Person) {
+			
+				Person personParam = (Person)obj;
+				
+				if(personParam.getNif().compareTo(this.nif) != 0) {
+					//si no son iguales lexicográficamente los dos nifs cambio el testigo
+					
+					flag = false;
+					
+				}
+			}else {
+				
+				flag = false;
+				
+			}
+		
 		}
-    	
+			
+			
     	return flag;
 	}
 	

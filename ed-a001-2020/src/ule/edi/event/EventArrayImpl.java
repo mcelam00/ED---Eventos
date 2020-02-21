@@ -121,7 +121,7 @@ public int getNumberOfNormalSaleSeats() {
 			
 			Type normalSaleType = Configuration.Type.NORMAL;
 			
-			if(seats[i].getType().equals(normalSaleType)) {
+			if(seats[i].getType() == normalSaleType) {
 				
 				numNormalSaleSeats++;
 			}
@@ -147,7 +147,7 @@ public int getNumberOfAdvanceSaleSeats() {
 			
 			Type AdvanceSaleType = Configuration.Type.ADVANCE_SALE;
 			
-			if(seats[i].getType().equals(AdvanceSaleType)) {
+			if(seats[i].getType() == AdvanceSaleType) { //== cuando es un tipo numerado
 				
 				numAdvanceSaleSeats++;
 			}
@@ -194,7 +194,11 @@ public Seat getSeat(int pos) {
 
 	Seat seatRequested;
 	
-	if(seats[pos-1] != null) { //esta ocupada
+	if(pos-1 < 0 & pos-1 >= nSeats) { //out of bounds
+		
+		seatRequested = null;
+		
+	}else if(seats[pos-1] != null) { //esta ocupada
 	
 		seatRequested = seats[pos-1];
 	
@@ -210,11 +214,15 @@ public Seat getSeat(int pos) {
 
 
 @Override
-public Person refundSeat(int pos) {
+public Person refundSeat(int pos) {  //ENUM?
 	
 	Person holder;
 	
-	if(seats[pos-1] != null) { //esta ocupada
+	if(pos-1 < 0 & pos-1 >= nSeats) { //out of bounds
+		
+		holder = null;
+		
+	}else if(seats[pos-1] != null) { //esta ocupada
 		
 		holder = seats[pos-1].getHolder();  //retorno al ocupante
 		
@@ -240,8 +248,9 @@ public boolean sellSeat(int pos, Person p, boolean advanceSale) {
 	
 	if(pos-1 < 0 & pos-1 >= nSeats) { //out of bounds
 		
-		System.out.println("No es posible acceder a esa butaca, excede el aforo del evento");
-	
+		transactionComplete = false;
+
+		
 	}else if(seats[pos-1] == null) { //butaca libre
 		
 		
@@ -371,7 +380,7 @@ public List<Integer> getAdvanceSaleSeatsList() {
 	
 	for(int i = 0; i < nSeats; i++) {
 		
-		if((seats[i] != null) & (seats[i].getType().equals(type))) {
+		if((seats[i] != null) & (seats[i].getType() == type)) {
 			
 			advanceSaleSeats.add(i+1);
 			
@@ -434,7 +443,7 @@ public Double getPrice(Seat seat) {
 	Type normalSale = Configuration.Type.NORMAL; 
 	
 	
-	if(seat.getType().equals(advanceSale)) {
+	if(seat.getType() == advanceSale) {
 		
 		Byte discount = this.discountAdvanceSale; //por defecto o si se le ha pasado uno al constructor, ese
 		
@@ -443,7 +452,7 @@ public Double getPrice(Seat seat) {
 		seatPrice = this.price*partsPerUnit;
 		
 		
-	}else if(seat.getType().equals(normalSale)) {
+	}else if(seat.getType() == normalSale) {
 		
 		seatPrice = this.price;
 		
@@ -466,7 +475,7 @@ public Double getCollectionEvent() {
 	for(int i = 0; i < nSeats; i++) {
 		
 		
-		if(seats[i].getType().equals(advanceSale)) {
+		if(seats[i].getType() == advanceSale) {
 			
 			Byte discount = this.discountAdvanceSale; //por defecto o si se le ha pasado uno al constructor, ese
 			
@@ -475,7 +484,7 @@ public Double getCollectionEvent() {
 			totalCollected = totalCollected + (this.price*partsPerUnit);
 			
 			
-		}else if(seats[i].getType().equals(normalSale)) {
+		}else if(seats[i].getType() == normalSale) {
 			
 			totalCollected = totalCollected + this.price;
 			
@@ -524,7 +533,7 @@ public boolean isAdvanceSale(Person p) {
 	Type typeOfSale = Configuration.Type.ADVANCE_SALE;
 	
 	
-	if(seats[position-1].getType().equals(typeOfSale)) {
+	if(seats[position-1].getType() == typeOfSale) {
 		
 		isAdvanceSale = true;
 		
