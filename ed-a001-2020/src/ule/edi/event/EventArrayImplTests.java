@@ -478,7 +478,41 @@ public class EventArrayImplTests {
 	//la clse arrayImp debe de estar al 100 y hacer para que el equals se cumplan todos los caminos
 
 
+	@Test
+	public void testequalsDiferentInstance() throws Exception{
+		//creo objeto persona para instanciar la clase
+		Person persone = new Person("Maria", "61234788", 25);
+		
+		//creo un objeto que no es persona para comprobar el if de que es de otra clase
+		Event  en = new EventArrayImpl("The Fabulous Five", parseLocalDate("24/02/2018 17:00:00"), 4);
 
+		Assert.assertTrue(persone.equals(en) == false);
+		Assert.assertEquals(persone.equals(en), false);
+		
+		//compruebo con un objeto igual exactamente
+		
+		Assert.assertTrue(persone.equals(persone) == true);
+		Assert.assertEquals(persone.equals(persone), true);
+		
+		//compuebo con otra persona que sea de la misma instancia (clase) pero con diferente NIF (mas grande)
+		Person person = new Person("Mario", "98234788", 35);
+		
+		Assert.assertTrue(persone.equals(person) == false);
+		Assert.assertEquals(persone.equals(person), false);
+		
+		//compuebo con otra persona que sea de la misma instancia (clase) pero con diferente NIF (mas pequeño)
+		Person person1 = new Person("Luis", "00005566", 27);
+				
+		Assert.assertTrue(persone.equals(person1) == false);
+		Assert.assertEquals(persone.equals(person1), false);
+		
+		
+		//compuebo con otra persona que sea de la misma instancia (clase) pero igual nif
+		Person person2 = new Person("Carmen", "61234788", 30);
+				
+		Assert.assertTrue(persone.equals(person2) == true);
+		Assert.assertEquals(persone.equals(person2), true);
+	}
 
 
 

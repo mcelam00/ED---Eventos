@@ -62,7 +62,7 @@ public class Person {
 				Person personParam = (Person)obj;
 				
 				if(personParam.getNif().compareTo(this.nif) != 0) {
-					//si no son iguales lexicográficamente los dos nifs cambio el testigo
+					//si no son iguales lexicogrï¿½ficamente los dos nifs cambio el testigo
 					
 					flag = false;
 					
