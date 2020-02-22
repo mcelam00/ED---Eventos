@@ -9,7 +9,7 @@ import ule.edi.model.*;
 import ule.edi.model.Configuration.Type;
 
 
-public class EventArrayImpl implements Event { //Esta es como si dijeramos la clase evento, porque evento per se es una interfaz con mÈtodos sin implementar. Han de implementarse aqui porque "implements la interface"
+public class EventArrayImpl implements Event { //Esta es como si dijeramos la clase evento, porque evento per se es una interfaz con m√©todos sin implementar. Han de implementarse aqui porque "implements la interface"
 	
 	private String name;
 	private Date eventDate;
@@ -26,7 +26,7 @@ public class EventArrayImpl implements Event { //Esta es como si dijeramos la cl
 	 // utiliza los precios por defecto: DEFAULT_PRICE y DEFAULT_DISCOUNT definidos en Configuration.java   
 	 // Debe crear el array de butacas
 	   
-	   //Se asignan los par·metros a los atributos
+	   //Se asignan los par√°metros a los atributos
 	   this.name = name;
 	   this.eventDate = date;
 	   this.nSeats = nSeats;
@@ -45,12 +45,11 @@ public class EventArrayImpl implements Event { //Esta es como si dijeramos la cl
 	   //Constructor igual que el anterior pero este permite el paso de descuento y precio establecido 
 	   // Debe crear el array de butacas
 	  
-	   //Se asignan los par·metros a los atributos
+	   //Se asignan los par√°metros a los atributos
 	   this.name = name;
 	   this.eventDate = date;
 	   this.nSeats = nSeats;
 	   
-	   //Se utilizan los valores por defecto como se indica 
 	   this.price = price;
 	   this.discountAdvanceSale = discount;
 
@@ -175,7 +174,7 @@ int numAvailableSeats = 0;
 	
 	for(int i = 0; i < this.nSeats; i++) {
 		
-		if(this.seats[i] == null) {
+		if(this.seats[i] == null) { //si ha pasado pero con una combinacion
 			
 			numAvailableSeats++;
 			
@@ -214,9 +213,9 @@ public Seat getSeat(int pos) {
 
 
 @Override
-public Person refundSeat(int pos) {  //ENUM?
+public Person refundSeat(int pos) { 
 	
-	Person holder;
+	Person holder = null; //si ya esta vacante retorna esto mismo
 	
 	if(pos-1 < 0 & pos-1 >= nSeats) { //out of bounds
 		
@@ -267,7 +266,7 @@ public boolean sellSeat(int pos, Person p, boolean advanceSale) {
 			seats[pos-1] = seatToSell;
 			
 			
-		}else if(advanceSale == true){
+		}else{
 			
 			Type type = Configuration.Type.ADVANCE_SALE;
 			
@@ -292,9 +291,14 @@ public int getNumberOfAttendingChildren() {
 	
 	for(int i = 0; i < nSeats; i++) {
 		
-		if((seats[i] != null) & (seats[i].getHolder().getAge() < Configuration.CHILDREN_EXMAX_AGE)) {  //esta ocupada y por un niÒo
+		if(seats[i] != null) {  //esta ocupada 
 			
-			numOfChilds++;
+			if(seats[i].getHolder().getAge() < Configuration.CHILDREN_EXMAX_AGE) { //la ocupacion es por un ni√±o
+			
+				numOfChilds++;
+				
+			}
+			
 			
 		}
 				
@@ -380,10 +384,11 @@ public List<Integer> getAdvanceSaleSeatsList() {
 	
 	for(int i = 0; i < nSeats; i++) {
 		
-		if((seats[i] != null) & (seats[i].getType() == type)) {
-			
-			advanceSaleSeats.add(i+1);
-			
+		if(seats[i] != null) {
+			if(seats[i].getType() == type) {
+				
+				advanceSaleSeats.add(i+1);
+			}
 		}
 		
 	}
@@ -401,7 +406,7 @@ public int getMaxNumberConsecutiveSeats() {
 	
 	for(int i = 0; i < nSeats; i++) {
 	
-		if(seats[i] != null || i == nSeats-1) { //si esta ocupada, se resetea el parcial. Si es al ultima iteracion quiero que compruebe tambien porque si llevo 6 al final y tengo 4 se pierde porque la ultima posicion del array es vacante y no compararia el 6 con el 4 almacenado
+		if(seats[i] != null) { //si esta ocupada, se resetea el parcial. 
 			
 			//antes de resetear el parcial se compara con el almacenado a ver si hemos conseguido una cifra mayor de vacantes consecutivos
 			if(currentMaximun > maximunStored) {
@@ -413,15 +418,28 @@ public int getMaxNumberConsecutiveSeats() {
 			currentMaximun = 0;
 			
 		}else {
-		
+			
+			
 			currentMaximun++;
+			
 		}
 		
 		
 	}
 	
+	//al salir miro el currrent como ha acabado y lo comparo tambien
+
 	
-	if(currentMaximun == nSeats) { //si todo el array esta vacante se retorna el tamaÒo
+	if(currentMaximun > maximunStored) {
+		
+		maximunStored = currentMaximun; //Si es al ultima iteracion quiero que compruebe tambien porque si llevo 6 al final y tengo 4 se pierde porque la ultima posicion del array es vacante y no compararia el 6 con el 4 almacenado
+	
+	}
+
+
+
+
+	if(currentMaximun == nSeats) { //si todo el array esta vacante se retorna el tama√±o
 	
 		maximunStored = nSeats;
 		
@@ -446,13 +464,13 @@ public Double getPrice(Seat seat) {
 	if(seat.getType() == advanceSale) {
 		
 		Byte discount = this.discountAdvanceSale; //por defecto o si se le ha pasado uno al constructor, ese
-		
-		float partsPerUnit = 1 - (discount/100); //en tanto por uno (25% descuento equivale a 0.75)
+					
+		double partsPerUnit = 1 - ((double)discount/100); //en tanto por uno (25% descuento equivale a 0.75)
 		
 		seatPrice = this.price*partsPerUnit;
 		
 		
-	}else if(seat.getType() == normalSale) {
+	}else { //si es venta normal
 		
 		seatPrice = this.price;
 		
@@ -474,20 +492,22 @@ public Double getCollectionEvent() {
 	
 	for(int i = 0; i < nSeats; i++) {
 		
-		
-		if(seats[i].getType() == advanceSale) {
+		if(seats[i] != null) {
 			
-			Byte discount = this.discountAdvanceSale; //por defecto o si se le ha pasado uno al constructor, ese
-			
-			float partsPerUnit = 1 - (discount/100); //en tanto por uno (25% descuento equivale a 0.75)
-			
-			totalCollected = totalCollected + (this.price*partsPerUnit);
-			
-			
-		}else if(seats[i].getType() == normalSale) {
-			
-			totalCollected = totalCollected + this.price;
-			
+			if(seats[i].getType() == advanceSale) {
+				
+				Byte discount = this.discountAdvanceSale; //por defecto o si se le ha pasado uno al constructor, ese
+				
+				double partsPerUnit = 1 - ((double)discount/100); //en tanto por uno (25% descuento equivale a 0.75)
+				
+				totalCollected = totalCollected + (this.price*partsPerUnit);
+				
+				
+			}else{
+				
+				totalCollected = totalCollected + this.price;
+				
+			}
 		}
 		
 		
@@ -500,17 +520,20 @@ public Double getCollectionEvent() {
 
 
 @Override
-public int getPosPerson(Person p) {
+public int getPosPerson(Person p) { //SI OBJETO ES NULL?
 	
 	int posicion = -1;
 	int i = 0;
 	
-	while(posicion == -1) { //mientras no se encuentre sigue buscando y si no est· queda el valor por defecto que es -1
+	while(posicion == -1 && i < seats.length) { //mientras no se encuentre y no se acabe el array sigue buscando y si no est√° queda el valor por defecto que es -1
 		
-		if(seats[i].getHolder().equals(p)) {
-			
-			posicion = i+1; 
-			
+		if(seats[i] != null) {
+		
+			if(seats[i].getHolder().equals(p)) { //si la posicion esta ocupada es cuando debe mirarlo
+				
+				posicion = i+1; 
+				
+			}
 		}
 		
 		i++;
