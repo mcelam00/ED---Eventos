@@ -120,7 +120,7 @@ public int getNumberOfNormalSaleSeats() {
 			
 			Type normalSaleType = Configuration.Type.NORMAL;
 			
-			if(seats[i].getType() == normalSaleType) {
+			if(seats[i].getType() == normalSaleType) { //sirve la llave porque es un enum
 				
 				numNormalSaleSeats++;
 			}
@@ -193,7 +193,7 @@ public Seat getSeat(int pos) {
 
 	Seat seatRequested;
 	
-	if(pos-1 < 0 & pos-1 >= nSeats) { //out of bounds
+	if(pos < 1 || pos > nSeats) {
 		
 		seatRequested = null;
 		
@@ -217,7 +217,7 @@ public Person refundSeat(int pos) {
 	
 	Person holder = null; //si ya esta vacante retorna esto mismo
 	
-	if(pos-1 < 0 & pos-1 >= nSeats) { //out of bounds
+	if(pos < 1 || pos > nSeats) {
 		
 		holder = null;
 		
@@ -245,8 +245,7 @@ public boolean sellSeat(int pos, Person p, boolean advanceSale) {
 	
 	//check de los parametros de entrada
 	
-	if(pos-1 < 0 & pos-1 >= nSeats) { //out of bounds
-		
+	if(pos < 1 || pos > nSeats) {		
 		transactionComplete = false;
 
 		
@@ -254,7 +253,7 @@ public boolean sellSeat(int pos, Person p, boolean advanceSale) {
 		
 		
 		transactionComplete = true;
-		
+		 
 		//se vende
 		
 		if(advanceSale == false) {

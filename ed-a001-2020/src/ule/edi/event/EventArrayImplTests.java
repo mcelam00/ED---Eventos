@@ -149,6 +149,8 @@ public class EventArrayImplTests {
 		//out of bounds
 		Assert.assertTrue(e.getSeat(300) == null);
 		Assert.assertEquals(e.getSeat(300), null);
+		Assert.assertTrue(e.getSeat(-7) == null);
+		Assert.assertEquals(e.getSeat(-7), null);
 	}
 	
 	
@@ -176,6 +178,10 @@ public class EventArrayImplTests {
 		e.refundSeat(3);
 		Assert.assertTrue(e.refundSeat(3) == null);
 		Assert.assertEquals(e.refundSeat(3), null);
+		
+		//trato de vender una butaca out of bounds
+		e.refundSeat(500);	
+		e.refundSeat(-5);
 					
 	}
 	
@@ -219,6 +225,19 @@ public class EventArrayImplTests {
 		Assert.assertNotEquals(e.getSeat(50), null);
 		Assert.assertTrue(e.getSeat(55) != null);
 		Assert.assertNotEquals(e.getSeat(55), null);
+		
+		//vendo un test fuera de bounds
+		returnValue = e.sellSeat(500, new Person("00000001", "Maria Luisa", 23), true);
+		
+		Assert.assertTrue(returnValue == false);
+		Assert.assertEquals(returnValue, false);
+		
+		returnValue = e.sellSeat(-5, new Person("00000001", "Maria Luisa", 23), true);
+		
+		Assert.assertTrue(returnValue == false);
+		Assert.assertEquals(returnValue, false);
+
+		
 				
 	}
 	
@@ -327,9 +346,9 @@ public class EventArrayImplTests {
 		e.sellSeat(50, new Person("71812230", "Daniel", 3), false);
 		availableSeatsAfter = e.getAvailableSeatsList();
 		Assert.assertTrue(availableSeats.get(50) == 51); 
-		Assert.assertEquals(availableSeats.get(50), Integer.valueOf(51)); //si no value of sale duplicate para Assert
+		Assert.assertEquals(availableSeats.get(50), Integer.valueOf(51)); 
 		
-		
+		 
 	}
 	
 	
@@ -388,7 +407,7 @@ public class EventArrayImplTests {
 		
 		//verificamos que el precio es el precio del evento
 		Assert.assertTrue(e.getPrice(butacaNomal) == 100.0);
-		Assert.assertEquals(e.getPrice(butacaNomal), Double.valueOf(100));
+		Assert.assertEquals(e.getPrice(butacaNomal), 100.0, 0.001);
 		
 		//creacion butaca con tipo anticipado
 		Type anticipada = Configuration.Type.ADVANCE_SALE;
@@ -396,7 +415,7 @@ public class EventArrayImplTests {
 		
 		//verificamos que el precio es el del evento pero descontandole el descuento
 		Assert.assertTrue(e.getPrice(butacaAnticipada) == 75.0);
-		Assert.assertEquals(e.getPrice(butacaAnticipada), Double.valueOf(75));
+		Assert.assertEquals(e.getPrice(butacaAnticipada), 75.0, 0.001); //debo indicar la tolerancia del double
 	}
 	
 	
@@ -407,8 +426,8 @@ public class EventArrayImplTests {
 		Event  en = new EventArrayImpl("The Fabulous Five", parseLocalDate("24/02/2018 17:00:00"), 4);
 		Assert.assertEquals(en.sellSeat(1, new Person("74563322", "Perico", 8), true),true);
 		Assert.assertEquals(en.sellSeat(2, new Person("78562322", "Pepa", 90), true),true);
-		Assert.assertTrue(en.getCollectionEvent()==150);
-		Assert.assertEquals(en.getCollectionEvent(), Double.valueOf(150));
+		Assert.assertTrue(en.getCollectionEvent()==150.0);
+		Assert.assertEquals(en.getCollectionEvent(), 150.0, 0.001);
 
 	}
 	
@@ -419,8 +438,8 @@ public class EventArrayImplTests {
 		Event  en = new EventArrayImpl("The Fabulous Five", parseLocalDate("24/02/2018 17:00:00"), 4);
 		Assert.assertEquals(en.sellSeat(1, new Person("74563322", "Perico", 8), false),true);
 		Assert.assertEquals(en.sellSeat(2, new Person("78562322", "Pepa", 90), false),true);
-		Assert.assertTrue(en.getCollectionEvent()==200);
-		Assert.assertEquals(en.getCollectionEvent(), Double.valueOf(200));
+		Assert.assertTrue(en.getCollectionEvent()==200.0);
+		Assert.assertEquals(en.getCollectionEvent(), 200.0, 0.001);
 
 	}
 	
